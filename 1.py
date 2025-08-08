@@ -3,14 +3,15 @@
 import requests
 import pandas as pd
 import json
+import datetime as dt
 
 url = 'https://api.cnyes.com/media/api/v1/newslist/category/headline' # 連線鉅亨網
 payload = {
     'page':1,
     'limit':30,
     'isCategoryHeadline':1,
-    'startAt':1753714074,
-    'endAt':1754578074
+    'startAt':int((dt.datetime.today() - dt.timedelta(days=11)).timestamp()),
+    'endAt':int(dt.datetime.today().timestamp())
 }
 res = requests.get(url, params=payload) 
 jd = json.loads(res.text) # 解析 JSON 轉成 dict
